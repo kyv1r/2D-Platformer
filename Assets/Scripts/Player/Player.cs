@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        Vector2 velocity = new Vector2(_moveDirection.x, _rigidbody.velocity.y);  // Сохраняем текущую скорость по Y (прыжок)
+        Vector2 velocity = new Vector2(_moveDirection.x, _rigidbody.velocity.y);
         _rigidbody.velocity = velocity * _moveSpeed * Time.deltaTime;
     }
 
