@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    public event Action DetectedPlayer;
+    public event Action Collected;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Collect()
     {
-        if (collision.TryGetComponent<Coin>(out Coin coin))
-            DetectedPlayer?.Invoke();
+        Collected?.Invoke();
+        gameObject.SetActive(false); 
     }
 }

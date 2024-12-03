@@ -37,14 +37,9 @@ public class Player : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        _coinCollector.FindedCoin += CollectCoin;
-    }
-
-    private void OnDisable()
-    {
-        _coinCollector.FindedCoin -= CollectCoin;
+        TransferCoin();
     }
 
     private void FixedUpdate()
@@ -53,9 +48,9 @@ public class Player : MonoBehaviour
         _animator.SetFloat("speed", Mathf.Abs(_rigidbody.velocity.x));
     }
 
-    private void CollectCoin()
+    private void TransferCoin()
     {
-        _countCoin++;
+        _countCoin = _coinCollector.CountCoin;
     }
 
     private void SetFacingDirection(Vector2 direction)
