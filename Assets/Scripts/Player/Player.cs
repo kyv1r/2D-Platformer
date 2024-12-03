@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,43 +7,48 @@ public class Player : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpForce;
 
+    private bool _isGround = false;
     private Vector2 _moveDirection;
-    private PlayerInput _playerInput;
     private Rigidbody2D _rigidbody;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+    }
 
-        _playerInput = new PlayerInput();
-
-        _playerInput.Player.Move.performed += OnMove;
+    private void Update()
+    {
+        Debug.Log(_isGround);
     }
 
     private void FixedUpdate()
     {
-        _moveDirection = _playerInput.Player.Move.ReadValue<Vector2>();
-        Move();
+        _rigidbody.velocity = new Vector2(_moveDirection.x * _moveSpeed, _rigidbody.velocity.y);
     }
 
-    private void OnEnable()
-    {
-        _playerInput.Enable();
-    }
-
-    private void OnDisable()
-    {
-        _playerInput.Disable();
-    }
-
-    private void Move()
-    {
-        Vector2 velocity = new Vector2(_moveDirection.x, _rigidbody.velocity.y);
-        _rigidbody.velocity = velocity * _moveSpeed * Time.deltaTime;
-    }
-
-    private void OnMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext context)
     {
         _moveDirection = context.action.ReadValue<Vector2>();
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (_isGround)
+        {
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
+            _isGround = false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent<IToucheable>(out IToucheable groundable) && groundable.IsToucheable)
+            _isGround = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent<IToucheable>(out IToucheable groundable))
+            _isGround = false;
     }
 }
