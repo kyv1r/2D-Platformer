@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(CollisionHandler))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed;

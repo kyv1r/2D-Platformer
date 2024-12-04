@@ -1,14 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private List<WaypointEnemy> _waypoints;
 
+    public bool _isFacingRight = true;
     private Rigidbody2D _rigidbody2D;
     private int _currentIndex;
-    public bool _isFacingRight = true;
+    private float _minDictanceToTraget = 0.1f;
 
     public Rigidbody2D Rigidbody2D => _rigidbody2D;
 
@@ -43,7 +45,7 @@ public class Enemy : MonoBehaviour
         Vector2 targetPosition = _waypoints[_currentIndex].transform.position;
         float distance = Vector2.Distance(transform.position, targetPosition);
 
-        if (distance <= 0.1f)
+        if (distance <= _minDictanceToTraget)
         {
             _currentIndex = (_currentIndex + 1 ) % _waypoints.Count;
         }

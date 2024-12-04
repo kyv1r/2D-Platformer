@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class BearAnimator : MonoBehaviour
 {
     [SerializeField] private Bear _bear;

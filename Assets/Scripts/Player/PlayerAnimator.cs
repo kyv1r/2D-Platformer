@@ -1,8 +1,9 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class PlayerAnimator : MonoBehaviour
 {
-    [SerializeField] private Player _player;    
+    [SerializeField] private Player _player;
 
     private Animator _animator;
 
@@ -10,8 +11,8 @@ public class PlayerAnimator : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
     }
-     
-    private void FixedUpdate()
+
+    private void Update()
     {
         _animator.SetFloat(AnimationStrings.speed, Mathf.Abs(_player.Rigidbody2D.velocity.x));
     }
