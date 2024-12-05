@@ -1,23 +1,19 @@
+using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    [SerializeField] private List<WaypointEnemy> _waypoints;
+    [SerializeField] private GroundDetector _groundDetector;
+    [SerializeField] private PlayerDetector _playerDetector;
 
     public bool _isFacingRight = true;
     private Rigidbody2D _rigidbody2D;
-    private int _currentIndex;
-    private float _minDictanceToTraget = 0.1f;
 
     public Rigidbody2D Rigidbody2D => _rigidbody2D;
-
-    private void Awake()
-    {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-    }
 
     public bool IsFacingRight
     {
@@ -35,6 +31,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+    }
+
     private void FixedUpdate()
     {
         Move();
@@ -42,18 +43,31 @@ public class Enemy : MonoBehaviour
 
     public void Move()
     {
-        Vector2 targetPosition = _waypoints[_currentIndex].transform.position;
-        float distance = Vector2.Distance(transform.position, targetPosition);
+        bool isGroundDetected = _groundDetector.CheckGround();
 
-        if (distance <= _minDictanceToTraget)
+        if (isGroundDetected == false)
+            SetFacingDirection(new Vector2(-transform.localScale.x, 0));
+
+        if (_playerDetector.TryGetPlayerPosition(out Vector2 playerPosition))
         {
-            _currentIndex = (_currentIndex + 1 ) % _waypoints.Count;
+            Vector2 direction = (playerPosition - (Vector2)transform.position).normalized;
+            float distance = Vector2.Distance(transform.position, playerPosition);
+            Debug.Log(distance);
+
+            if (distance <= 0.3f)
+            {
+                Debug.Log("asdasd");
+                _rigidbody2D.velocity = Vector2.zero;
+                return;
+            }
+
+            _rigidbody2D.velocity = new Vector2(direction.x * _speed, _rigidbody2D.velocity.y);
+
+            return;
         }
 
-        Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
-        _rigidbody2D.velocity = new Vector2(direction.x * _speed, _rigidbody2D.velocity.y);
-
-        SetFacingDirection(direction);
+        float moveDirection = IsFacingRight ? 1 : -1;
+        _rigidbody2D.velocity = new Vector2(moveDirection * _speed, _rigidbody2D.velocity.y);
     }
 
     public void SetFacingDirection(Vector2 direction)
