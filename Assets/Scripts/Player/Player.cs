@@ -1,3 +1,4 @@
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -9,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int _countCoin;
 
     private Rigidbody2D _rigidbody2D;
+
     public Rigidbody2D Rigidbody2D => _rigidbody2D;
 
     private void Awake()

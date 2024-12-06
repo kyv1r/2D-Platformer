@@ -8,25 +8,31 @@ public class PlayerDetector : MonoBehaviour
     [SerializeField] private float _distanceRay;
     [SerializeField] private LayerMask _layerMask;
 
-    public bool TryGetPlayerPosition(out Vector2 playerPosition)
+    private bool _isPlayerDetected;
+    private Vector2 _playerDirection;
+
+    public bool IsPlayerDetected => _isPlayerDetected;
+
+    public Vector2 GetPlayerPosition()
     {
-        Vector2 rayDirection = _enemy.IsFacingRight ? Vector2.right : Vector2.left;
+        Collider2D[] players = Physics2D.OverlapCircleAll(transform.position, 2f, _layerMask);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, _distanceRay, _layerMask);
-
-        if (hit.collider != null)
+        foreach (var player in players)
         {
-            Debug.DrawRay(transform.position, rayDirection * hit.distance, Color.green);
+            Debug.Log(player.name);
+            _isPlayerDetected = true;
+            _playerDirection = (player.transform.position - transform.position).normalized;
 
-            playerPosition = hit.point;
-            return true;
+            if(player == null)
+                _isPlayerDetected = false;
         }
-        else
-        {
-            Debug.DrawRay(transform.position, rayDirection * _distanceRay, Color.red);
 
-            playerPosition = Vector2.zero;
-            return false;
-        }
+        return _playerDirection;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, 2f);
     }
 }
