@@ -105,7 +105,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void PatrolArea()
     {
-        bool isGroundDetected = _groundDetector.CheckGround();
+        bool isGroundDetected = _groundDetector.HasGroundBelow();
 
         if (isGroundDetected == false)
             SetFacingDirection(new Vector2(-transform.localScale.x, 0));
