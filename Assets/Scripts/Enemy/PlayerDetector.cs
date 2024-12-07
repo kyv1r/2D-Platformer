@@ -9,7 +9,7 @@ public class PlayerDetector : MonoBehaviour
     [SerializeField] private LayerMask _layerMask;
 
     private bool _isPlayerDetected;
-    private Vector2 _playerDirection;
+    private Vector2 _playerPosition;
 
     public bool IsPlayerDetected => _isPlayerDetected;
 
@@ -19,15 +19,17 @@ public class PlayerDetector : MonoBehaviour
 
         foreach (var player in players)
         {
-            Debug.Log(player.name);
             _isPlayerDetected = true;
-            _playerDirection = (player.transform.position - transform.position).normalized;
-
-            if(player == null)
-                _isPlayerDetected = false;
+            _playerPosition = player.transform.position;
         }
 
-        return _playerDirection;
+        if(players.Length == 0)
+        {
+            _isPlayerDetected = false;
+        }
+
+        return _playerPosition;
+
     }
 
     private void OnDrawGizmosSelected()

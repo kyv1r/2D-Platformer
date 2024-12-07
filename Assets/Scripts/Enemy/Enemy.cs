@@ -19,8 +19,10 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private GroundDetector _groundDetector;
     [SerializeField] private PlayerDetector _playerDetector;
 
+    private float _minAttackDistance = 0.7f;
+    private float _attackRate = 1f;
     private Coroutine _attackCoroutine;
-    private bool _isAttacking = false;
+    private bool _isAttack = false;
     public bool _isFacingRight = true;
     private Rigidbody2D _rigidbody2D;
 
@@ -85,7 +87,26 @@ public class Enemy : MonoBehaviour, IDamageable
     public void FollowPlayer()
     {
         Vector2 playerPosition = _playerDetector.GetPlayerPosition();
-        _rigidbody2D.velocity = new Vector2(playerPosition.x * _speed, _rigidbody2D.velocity.y);
+
+        Vector2 direction = playerPosition - (Vector2)transform.position;
+        float distance = direction.sqrMagnitude;
+        direction.Normalize();
+
+        _rigidbody2D.velocity = new Vector2(direction.x * _speed, _rigidbody2D.velocity.y);
+
+        if (distance <= _minAttackDistance * _minAttackDistance)
+        {
+            _isAttack = true;
+            _attackCoroutine = StartCoroutine(WaitForNextAttack());
+            _rigidbody2D.velocity = Vector2.zero;
+        }
+
+        _isAttack = false;
+
+        Debug.Log($"Distance: {distance}");
+        Debug.Log($"Player Position: {playerPosition}");
+
+        SetFacingDirection(direction);
 
     }
 
@@ -111,7 +132,6 @@ public class Enemy : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         Health -= damage;
-        Debug.Log(_healt);
     }
 
     public void Attack()
@@ -126,17 +146,12 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private IEnumerator WaitForNextAttack()
     {
-        WaitForSeconds periodicityAttack = new WaitForSeconds(1f);
+        WaitForSeconds periodicityAttack = new WaitForSeconds(_attackRate);
 
-        while(_isAttacking)
+        while (_isAttack)
         {
             Attacked?.Invoke();
             yield return periodicityAttack;
-
-            if (!_isAttacking)
-            {
-                yield break;
-            }
         }
     }
 
