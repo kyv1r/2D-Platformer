@@ -1,13 +1,12 @@
 using System;
-using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Coin : InteractableItem
 {
     public event Action Collected;
 
-    public void Collect()
+    public override void Collect()
     {
         Collected?.Invoke();
-        gameObject.SetActive(false); 
+        base.Collect();
     }
 }

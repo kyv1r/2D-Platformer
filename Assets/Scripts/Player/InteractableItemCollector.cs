@@ -3,27 +3,14 @@ using UnityEngine;
 
 public class InteractableItemCollector : MonoBehaviour
 {
-    private int _countCoin;
-    private float _healPoint;
-
-    public event Action Healed;
-
-    public int CountCoin => _countCoin;
-    public float HealPoint => _healPoint;
+    public event Action<float, InteractableItem> Collected;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Coin>(out Coin coin))
+        if (collision.TryGetComponent<InteractableItem>(out InteractableItem item))
         {
-            coin.Collect();
-            _countCoin++;
-        }
-
-        if (collision.TryGetComponent<IInteractableHealItem>(out IInteractableHealItem healItem))
-        {
-            healItem.Collect();
-            _healPoint = healItem.Heal();
-            Healed?.Invoke();
+            Collected?.Invoke(item.Value, item);
+            item.Collect();
         }
     }
 }

@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _jumpForce;
     [SerializeField] private InteractableItemCollector _interactableItemCollector;
     [SerializeField] private PlayerMovement _playerMovement;
-    [SerializeField] private int _countCoin;
+    [SerializeField] private float _countCoin;
 
     private Rigidbody2D _rigidbody2D;
 
@@ -20,26 +20,33 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        _interactableItemCollector.Healed += Heal;
+        _interactableItemCollector.Collected += OnItemCollected;
     }
 
     private void OnDisable()
     {
-        _interactableItemCollector.Healed -= Heal;
+        _interactableItemCollector.Collected -= OnItemCollected;
     }
 
-    private void Update()
+    private void OnItemCollected(float value, InteractableItem item)
     {
-        TransferCoin();
+        if (item is Coin)
+        {
+            TransferCoin(value);
+        }
+        else if (item is Cake)
+        {
+            Heal(value);
+        }
     }
 
-    private void TransferCoin()
+    private void TransferCoin(float coinValue)
     {
-        _countCoin = _interactableItemCollector.CountCoin;
+        _countCoin += coinValue;
     }
 
-    private void Heal()
+    private void Heal(float healPoint)
     {
-        _playerMovement.Health += _interactableItemCollector.HealPoint;
+        _playerMovement.Health += healPoint;
     }
 }
