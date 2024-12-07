@@ -24,17 +24,9 @@ public class PlayerDetector : MonoBehaviour
         }
 
         if(players.Length == 0)
-        {
             _isPlayerDetected = false;
-        }
 
         return _playerPosition;
 
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, 2f);
     }
 }

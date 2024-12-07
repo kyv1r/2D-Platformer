@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class GroundDetector : MonoBehaviour
@@ -11,14 +10,8 @@ public class GroundDetector : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, _distanceRay, _layerMask);
 
         if (hit.collider != null)
-        {
-            Debug.DrawRay(transform.position, -transform.up * hit.distance, Color.green);
             return true; 
-        }
         else
-        {
-            Debug.DrawRay(transform.position, -transform.up * _distanceRay, Color.red);
             return false;
-        }
     }
 }

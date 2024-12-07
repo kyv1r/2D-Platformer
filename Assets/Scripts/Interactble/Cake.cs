@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Cake : MonoBehaviour, IInteractableHealItem
@@ -9,7 +7,7 @@ public class Cake : MonoBehaviour, IInteractableHealItem
 
     public event Action Collected;
 
-    public float HealingPoint { get => _healPoint; set => _healPoint = value; }
+    public float HealPoint { get => _healPoint; set => _healPoint = value; }
 
     public void Collect()
     {
@@ -19,7 +17,7 @@ public class Cake : MonoBehaviour, IInteractableHealItem
 
     public float Heal()
     {
-        return HealingPoint;
+        return HealPoint;
     }
 
 }

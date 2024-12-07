@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -24,9 +23,7 @@ public class Spawner<T, K> : MonoBehaviour where T : MonoBehaviour where K : Mon
     private void Start()
     {
         for (int i = 0; i < _spawnPoints.Count; i++)
-        {
             _pool.Get();
-        }
     }
 
     protected virtual void OnGet(T t)

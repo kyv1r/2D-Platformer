@@ -1,8 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -102,10 +99,6 @@ public class Enemy : MonoBehaviour, IDamageable
         }
 
         _isAttack = false;
-
-        Debug.Log($"Distance: {distance}");
-        Debug.Log($"Player Position: {playerPosition}");
-
         SetFacingDirection(direction);
 
     }
@@ -153,11 +146,5 @@ public class Enemy : MonoBehaviour, IDamageable
             Attacked?.Invoke();
             yield return periodicityAttack;
         }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(_attackPosition.position, _attackRange);
     }
 }

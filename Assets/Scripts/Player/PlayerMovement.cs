@@ -111,10 +111,4 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     {
         Health -= damage;
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(_attackPosition.position, _attackRange);
-    }
 }
