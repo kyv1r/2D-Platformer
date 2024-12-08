@@ -1,6 +1,6 @@
 using System;
 
-public class Cake : InteractableItem
+public class FirstAidKit : InteractableItem
 {
     public event Action Collected;
 

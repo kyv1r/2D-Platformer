@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         {
             TransferCoin(value);
         }
-        else if (item is Cake)
+        else if (item is FirstAidKit)
         {
             Heal(value);
         }

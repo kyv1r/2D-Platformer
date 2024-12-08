@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerDetector : MonoBehaviour
@@ -7,6 +5,7 @@ public class PlayerDetector : MonoBehaviour
     [SerializeField] private Enemy _enemy;
     [SerializeField] private float _distanceRay;
     [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private float _radiusDetect;
 
     private bool _isPlayerDetected;
     private Vector2 _playerPosition;
@@ -15,7 +14,7 @@ public class PlayerDetector : MonoBehaviour
 
     public Vector2 GetPlayerPosition()
     {
-        Collider2D[] players = Physics2D.OverlapCircleAll(transform.position, 2f, _layerMask);
+        Collider2D[] players = Physics2D.OverlapCircleAll(transform.position, _radiusDetect, _layerMask);
 
         foreach (var player in players)
         {
@@ -23,10 +22,9 @@ public class PlayerDetector : MonoBehaviour
             _playerPosition = player.transform.position;
         }
 
-        if(players.Length == 0)
+        if (players.Length == 0)
             _isPlayerDetected = false;
 
         return _playerPosition;
-
     }
 }

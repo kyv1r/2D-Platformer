@@ -4,6 +4,7 @@ using UnityEngine;
 public class BearAnimator : MonoBehaviour
 {
     [SerializeField] private Bear _bear;
+    [SerializeField] private EnemyAttack _enemyAttack;
 
     private Animator _animator;
 
@@ -14,12 +15,12 @@ public class BearAnimator : MonoBehaviour
 
     private void OnEnable()
     {
-        _bear.Attacked += AttackAnimation;
+        _enemyAttack.Attacked += AttackAnimation;
     }
 
     private void OnDisable()
     {
-        _bear.Attacked -= AttackAnimation;
+        _enemyAttack.Attacked -= AttackAnimation;
     }
 
     private void FixedUpdate()
