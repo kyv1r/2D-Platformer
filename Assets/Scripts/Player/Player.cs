@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _jumpForce;
     [SerializeField] private InteractableItemCollector _interactableItemCollector;
     [SerializeField] private PlayerMovement _playerMovement;
+    [SerializeField] private HealthSystem _healthSystem;
     [SerializeField] private float _countCoin;
 
     private Rigidbody2D _rigidbody2D;
@@ -47,6 +48,6 @@ public class Player : MonoBehaviour
 
     private void Heal(float healPoint)
     {
-        _playerMovement.Health += healPoint;
+        _healthSystem.Heal(healPoint);
     }
 }

@@ -23,7 +23,7 @@ public class BearAnimator : MonoBehaviour
         _enemyAttack.Attacked -= AttackAnimation;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         _animator.SetFloat(AnimationStrings.speed, Mathf.Abs(_bear.Rigidbody2D.velocity.x));
     }

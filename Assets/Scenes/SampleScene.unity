@@ -1598,6 +1598,8 @@ GameObject:
   - component: {fileID: 623104406}
   - component: {fileID: 623104407}
   - component: {fileID: 623104410}
+  - component: {fileID: 623104412}
+  - component: {fileID: 623104411}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1737,6 +1739,7 @@ MonoBehaviour:
   _jumpForce: 4
   _interactableItemCollector: {fileID: 227370409}
   _playerMovement: {fileID: 623104409}
+  _healthSystem: {fileID: 623104412}
   _countCoin: 0
 --- !u!114 &623104406
 MonoBehaviour:
@@ -1797,8 +1800,8 @@ MonoBehaviour:
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 623104409}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+      - m_Target: {fileID: 623104411}
+        m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
         m_MethodName: OnAttack
         m_Mode: 0
         m_Arguments:
@@ -1849,7 +1852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 623104405}
-  _playerMovement: {fileID: 623104409}
+  _playerAttack: {fileID: 623104411}
 --- !u!114 &623104409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1862,18 +1865,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf90e69c876e6a40a3e65909115f839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healt: 90
-  _maxHealt: 100
-  _minHealt: 0
-  _damage: 50
-  _attackPosition: {fileID: 1438089024}
-  _attackRange: 0.15
-  _player: {fileID: 623104405}
   _moveSpeed: 3
   _jumpForce: 4
-  _layerMaskEnemy:
-    serializedVersion: 2
-    m_Bits: 64
   _isFacingRight: 1
 --- !u!114 &623104410
 MonoBehaviour:
@@ -1887,6 +1880,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78778dec1dfac474688bd6b1cba20008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &623104411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623104400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc5d5f29325a1442b80f5ea36d29a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackPosition: {fileID: 1438089024}
+  _attackRange: 3
+  _damage: 5
+  _layerMaskEnemy:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &623104412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623104400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24edebc23260840448c8d735e4d21ca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+  _minHealth: 0
+  _currentHealth: 80
 --- !u!1 &667068516
 GameObject:
   m_ObjectHideFlags: 0

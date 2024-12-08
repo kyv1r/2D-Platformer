@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private Player _player;
-    [SerializeField] private PlayerMovement _playerMovement;
+    [SerializeField] private PlayerAttack _playerAttack;
 
     private Animator _animator;
 
@@ -15,12 +15,12 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnEnable()
     {
-        _playerMovement.Attacked += AttackAnimation;
+        _playerAttack.Attacked += AttackAnimation;
     }
 
     private void OnDisable()
     {
-        _playerMovement.Attacked -= AttackAnimation;
+        _playerAttack.Attacked -= AttackAnimation;
     }
 
     private void Update()
