@@ -3,40 +3,40 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour, IDamageable
 {
-    [SerializeField] private float _maxHealth = 100;
-    [SerializeField] private float _minHealth = 0;
-    [SerializeField] private float _currentHealth;
+    [SerializeField] private float _maxValue = 100;
+    [SerializeField] private float _minValue = 0;
+    [SerializeField] private float _currentValue;
 
-    public event Action<float> OnHealthChanged;
+    public event Action<float> HealthChanged;
     public event Action OnDied;
 
-    public float CurrentHealth
+    public float CurrentValue
     {
-        get => _currentHealth;
+        get => _currentValue;
         private set
         {
-            _currentHealth = Mathf.Clamp(value, _minHealth, _maxHealth);
-            OnHealthChanged?.Invoke(_currentHealth);
+            _currentValue = Mathf.Clamp(value, _minValue, _maxValue);
+            HealthChanged?.Invoke(_currentValue);
 
-            if (_currentHealth <= _minHealth)
+            if (_currentValue <= _minValue)
                 OnDied?.Invoke();
         }
     }
 
-    public float MaxHealth => _maxHealth;
+    public float MaxValue => _maxValue;
 
     private void Awake()
     {
-        _currentHealth = _maxHealth;
+        _currentValue = _maxValue;
     }
 
     public void TakeDamage(float damage)
     {
-        CurrentHealth -= damage;
+        CurrentValue -= damage;
     }
 
     public void Heal(float amount)
     {
-        CurrentHealth += amount;
+        CurrentValue += amount;
     }
 }

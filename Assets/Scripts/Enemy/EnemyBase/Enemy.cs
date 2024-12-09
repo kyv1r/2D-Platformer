@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _attackDistance = 0.6f;
+    [SerializeField] private PlayerDetector _playerDetector;
 
     private EnemyMovement _movement;
     private EnemyAttack _attack;
@@ -24,16 +25,16 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _movement.PlayerDetector.GetPlayerPosition();
+        _playerDetector.SetPlayerPosition();
 
-        if (_movement.PlayerDetector.IsPlayerDetected)
+        if (_playerDetector.IsPlayerDetected)
         {
-            Vector2 playerPosition = _movement.PlayerDetector.GetPlayerPosition();
+            Vector2 playerPosition = _playerDetector.SetPlayerPosition();
             _movement.FollowPlayer(playerPosition);
 
-            float distanceToPlayer = Vector2.Distance(transform.position, playerPosition);
+            float distanceToPlayer = ((Vector2)transform.position - playerPosition).sqrMagnitude;
 
-            if (distanceToPlayer <= _attackDistance)
+            if (distanceToPlayer <= _attackDistance * _attackDistance)
                 _movement.Rigidbody2D.velocity = Vector2.zero;
         }
         else
@@ -47,14 +48,14 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        _movement.PlayerDetector.GetPlayerPosition();
+        _playerDetector.SetPlayerPosition();
 
-        if (_movement.PlayerDetector.IsPlayerDetected)
+        if (_playerDetector.IsPlayerDetected)
         {
-            Vector2 playerPosition = _movement.PlayerDetector.GetPlayerPosition();
-            float distanceToPlayer = Vector2.Distance(transform.position, playerPosition);
+            Vector2 playerPosition = _playerDetector.SetPlayerPosition();
+            float distanceToPlayer = ((Vector2)transform.position - playerPosition).sqrMagnitude;
 
-            if (distanceToPlayer <= _attackDistance)
+            if (distanceToPlayer <= _attackDistance * _attackDistance)
                 _attack.StartAttack();
             else
                 _attack.StopAttack();

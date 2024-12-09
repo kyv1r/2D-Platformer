@@ -10,6 +10,7 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private LayerMask _layerMaskPlayer;
     [SerializeField] private float _attackRate = 1f;
 
+    Coroutine _attackCoroutine;
     private bool _isAttacking;
 
     public event Action Attacked;
@@ -19,7 +20,7 @@ public class EnemyAttack : MonoBehaviour
         if (_isAttacking == false)
         {
             _isAttacking = true;
-            StartCoroutine(WaitForNextAttack());
+            _attackCoroutine = StartCoroutine(WaitForNextAttack());
         }
     }
 
@@ -28,7 +29,7 @@ public class EnemyAttack : MonoBehaviour
         if (_isAttacking)
         {
             _isAttacking = false;
-            StopCoroutine(WaitForNextAttack());
+            StopCoroutine(_attackCoroutine);
         }
     }
 
@@ -37,9 +38,7 @@ public class EnemyAttack : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(_attackPosition.position, _attackRange, _layerMaskPlayer);
 
         foreach (var collider in colliders)
-        {
             collider.GetComponent<IDamageable>()?.TakeDamage(_damage);
-        }
     }
 
     private IEnumerator WaitForNextAttack()

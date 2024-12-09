@@ -10,13 +10,11 @@ public class Player : MonoBehaviour
     [SerializeField] private HealthSystem _healthSystem;
     [SerializeField] private float _countCoin;
 
-    private Rigidbody2D _rigidbody2D;
-
-    public Rigidbody2D Rigidbody2D => _rigidbody2D;
+    public Rigidbody2D Rigidbody2D { get; private set; }
 
     private void Awake()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     private void OnEnable()

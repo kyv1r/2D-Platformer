@@ -12,7 +12,7 @@ public class PlayerDetector : MonoBehaviour
 
     public bool IsPlayerDetected => _isPlayerDetected;
 
-    public Vector2 GetPlayerPosition()
+    public Vector2 SetPlayerPosition()
     {
         Collider2D[] players = Physics2D.OverlapCircleAll(transform.position, _radiusDetect, _layerMask);
 
