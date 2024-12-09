@@ -16,7 +16,7 @@ public class EnemyAttack : MonoBehaviour
 
     public void StartAttack()
     {
-        if (!_isAttacking)
+        if (_isAttacking == false)
         {
             _isAttacking = true;
             StartCoroutine(WaitForNextAttack());
@@ -34,11 +34,11 @@ public class EnemyAttack : MonoBehaviour
 
     public void Attack()
     {
-        Collider2D[] players = Physics2D.OverlapCircleAll(_attackPosition.position, _attackRange, _layerMaskPlayer);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(_attackPosition.position, _attackRange, _layerMaskPlayer);
 
-        foreach (var player in players)
+        foreach (var collider in colliders)
         {
-            player.GetComponent<IDamageable>()?.TakeDamage(_damage);
+            collider.GetComponent<IDamageable>()?.TakeDamage(_damage);
         }
     }
 
