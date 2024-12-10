@@ -1,17 +1,15 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class EnemyMovement : MonoBehaviour
+public class EnemyMover : MonoBehaviour
 {
     [SerializeField] private float _speed = 2f;
-    [SerializeField] private GroundDetector _groundDetector;
 
     private Rigidbody2D _rigidbody2D;
     private Vector2 _currentDirection = Vector2.zero;
 
     public Vector2 CurrentDirection => _currentDirection;
     public Rigidbody2D Rigidbody2D => _rigidbody2D;
-    public GroundDetector GroundDetector => _groundDetector;
 
     private void Awake()
     {

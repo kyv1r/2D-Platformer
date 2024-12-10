@@ -3,11 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
+    [SerializeField] private InteractableItemCollector _interactableItemCollector;
+    [SerializeField] private HealthSystem _healthSystem;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpForce;
-    [SerializeField] private InteractableItemCollector _interactableItemCollector;
-    [SerializeField] private PlayerMovement _playerMovement;
-    [SerializeField] private HealthSystem _healthSystem;
     [SerializeField] private float _countCoin;
 
     public Rigidbody2D Rigidbody2D { get; private set; }

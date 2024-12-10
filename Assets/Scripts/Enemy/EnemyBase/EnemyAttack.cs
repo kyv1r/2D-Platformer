@@ -20,7 +20,7 @@ public class EnemyAttack : MonoBehaviour
         if (_isAttacking == false)
         {
             _isAttacking = true;
-            _attackCoroutine = StartCoroutine(WaitForNextAttack());
+            _attackCoroutine = StartCoroutine(AttackInterval());
         }
     }
 
@@ -41,7 +41,7 @@ public class EnemyAttack : MonoBehaviour
             collider.GetComponent<IDamageable>()?.TakeDamage(_damage);
     }
 
-    private IEnumerator WaitForNextAttack()
+    private IEnumerator AttackInterval()
     {
         WaitForSeconds periodicityAttack = new WaitForSeconds(_attackRate);
 

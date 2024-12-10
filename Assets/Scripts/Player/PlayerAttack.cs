@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,7 +10,28 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float _damage;
     [SerializeField] private LayerMask _layerMaskEnemy;
 
+    private PlayerInput _playerInput;
+
     public event Action Attacked;
+
+    private void Awake()
+    {
+        _playerInput = new PlayerInput();
+    }
+
+    private void OnEnable()
+    {
+        _playerInput.Enable();
+
+        _playerInput.Player.Attack.performed += OnAttack;
+    }
+
+    private void OnDisable()
+    {
+        _playerInput.Disable();
+
+        _playerInput.Player.Attack.performed -= OnAttack;
+    }
 
     public void OnAttack(InputAction.CallbackContext context)
     {

@@ -6,7 +6,7 @@ public class CollisionHandler : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<IToucheable>(out IToucheable toucheable))
+        if (collision.gameObject.TryGetComponent<IToucheable>(out _))
         {
             IsTouching = true;
         }
@@ -14,7 +14,7 @@ public class CollisionHandler : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<IToucheable>(out IToucheable toucheable))
+        if (collision.gameObject.TryGetComponent<IToucheable>(out _))
         {
             IsTouching = false;
         }

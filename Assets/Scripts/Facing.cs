@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class EnemyFacing : MonoBehaviour
+public class Facing : MonoBehaviour
 {
-    [SerializeField] private EnemyMovement _enemyMovement;
-
     private bool _isFacingRight = true;
 
     public bool IsFacingRight

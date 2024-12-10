@@ -17,9 +17,6 @@ public class HealthSystem : MonoBehaviour, IDamageable
         {
             _currentValue = Mathf.Clamp(value, _minValue, _maxValue);
             HealthChanged?.Invoke(_currentValue);
-
-            if (_currentValue <= _minValue)
-                OnDied?.Invoke();
         }
     }
 
@@ -32,11 +29,18 @@ public class HealthSystem : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        CurrentValue -= damage;
+        if (damage >= 0)
+        {
+            CurrentValue -= damage;
+
+            if (_currentValue <= _minValue)
+                OnDied?.Invoke();
+        }
     }
 
     public void Heal(float amount)
     {
-        CurrentValue += amount;
+        if (amount >= 0)
+            CurrentValue += amount;
     }
 }

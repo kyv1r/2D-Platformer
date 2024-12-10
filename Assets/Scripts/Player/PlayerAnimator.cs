@@ -25,11 +25,11 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Update()
     {
-        _animator.SetFloat(AnimationStrings.speed, Mathf.Abs(_player.Rigidbody2D.velocity.x));
+        _animator.SetFloat(AnimationStrings.Speed, Mathf.Abs(_player.Rigidbody2D.velocity.x));
     }
 
     private void AttackAnimation()
     {
-        _animator.SetTrigger(AnimationStrings.attack);
+        _animator.SetTrigger(AnimationStrings.Attack);
     }
 }

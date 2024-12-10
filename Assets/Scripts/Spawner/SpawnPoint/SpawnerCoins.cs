@@ -1,9 +1,9 @@
-public class SpawnerCoins : Spawner<Coin, SpawnPointCoin>
+public class SpawnerCoins : Spawner<Coin, SpawnPoint>
 {
-    protected override void OnGet(Coin coin)
+    protected override void OnGetIneractbableItem(Coin coin)
     {
         coin.Collected += () => _pool.Release(coin);
-        base.OnGet(coin);
+        base.OnGetIneractbableItem(coin);
     }
 
     protected override void OnRelease(Coin coin)

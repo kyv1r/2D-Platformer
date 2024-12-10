@@ -1,9 +1,9 @@
-public class SpawnerCake : Spawner<FirstAidKit, SpawnPointCake>
+public class SpawnerCake : Spawner<FirstAidKit, SpawnPoint>
 {
-    protected override void OnGet(FirstAidKit cake)
+    protected override void OnGetIneractbableItem(FirstAidKit cake)
     {
         cake.Collected += () => _pool.Release(cake);
-        base.OnGet(cake);
+        base.OnGetIneractbableItem(cake);
     }
 
     protected override void OnRelease(FirstAidKit cake)
