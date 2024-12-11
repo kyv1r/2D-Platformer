@@ -7,7 +7,7 @@ public class InteractableItemCollector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<InteractableItem>(out InteractableItem item))
+        if (collision.TryGetComponent(out InteractableItem item))
         {
             Collected?.Invoke(item.Value, item);
             item.Collect();

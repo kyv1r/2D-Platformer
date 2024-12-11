@@ -7,25 +7,23 @@ public class PlayerDetector : MonoBehaviour
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float _radiusDetect;
 
-    private bool _isPlayerDetected;
-    private Vector2 _playerPosition;
-
-    public bool IsPlayerDetected => _isPlayerDetected;
-
-    public Vector2 FindPlayerPosition()
+    public bool TryFindPlayerPosition(out Vector2 playerPosition)
     {
         Collider2D[] players = Physics2D.OverlapCircleAll(transform.position, _radiusDetect, _layerMask);
 
         if (players.Length == 0)
-            _isPlayerDetected = false;
+        {
+            playerPosition = Vector2.zero;
+            return false;
+        }
 
         foreach (var player in players)
         {
-            _isPlayerDetected = true;
-            _playerPosition = player.transform.position;
-            return _playerPosition;
+            playerPosition = player.transform.position;
+            return true;
         }
 
-        return _playerPosition;
+        playerPosition = Vector2.zero;
+        return false;
     }
 }

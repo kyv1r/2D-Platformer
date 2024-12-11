@@ -12,6 +12,5 @@ public class InteractableItem : MonoBehaviour
     public virtual void Collect()
     {
         Collected.Invoke();
-        gameObject.SetActive(false);
     }
 }

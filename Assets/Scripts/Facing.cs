@@ -15,9 +15,8 @@ public class Facing : MonoBehaviour
             if (_isFacingRight != value)
             {
                 transform.localScale *= new Vector2(-1, 1);
+                _isFacingRight = value;
             }
-
-            _isFacingRight = value;
         }
     }
 

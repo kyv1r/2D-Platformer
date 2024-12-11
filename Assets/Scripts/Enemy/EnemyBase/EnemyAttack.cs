@@ -20,7 +20,7 @@ public class EnemyAttack : MonoBehaviour
         if (_isAttacking == false)
         {
             _isAttacking = true;
-            _attackCoroutine = StartCoroutine(AttackInterval());
+            _attackCoroutine = StartCoroutine(PerformPeriodicAttack());
         }
     }
 
@@ -38,10 +38,13 @@ public class EnemyAttack : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(_attackPosition.position, _attackRange, _layerMaskPlayer);
 
         foreach (var collider in colliders)
-            collider.GetComponent<IDamageable>()?.TakeDamage(_damage);
+        {
+            if (collider.TryGetComponent(out IDamageable damageable))
+                damageable.TakeDamage(_damage);
+        }
     }
 
-    private IEnumerator AttackInterval()
+    private IEnumerator PerformPeriodicAttack()
     {
         WaitForSeconds periodicityAttack = new WaitForSeconds(_attackRate);
 

@@ -15,8 +15,7 @@ public class Spawner<T, K> : MonoBehaviour where T : MonoBehaviour where K : Mon
     {
         _pool = new ObjectPool<T>
             (createFunc: () => Instantiate(_prefab),
-            actionOnGet: (t) => OnGetIneractbableItem(t),
-            actionOnRelease: (t) => OnRelease(t)
+            actionOnGet: (interactableItem) => OnGetIneractbableItem(interactableItem)
             );
     }
 
@@ -26,15 +25,14 @@ public class Spawner<T, K> : MonoBehaviour where T : MonoBehaviour where K : Mon
             _pool.Get();
     }
 
-    protected virtual void OnGetIneractbableItem(T t)
+    protected virtual void OnGetIneractbableItem(T interactableItem)
     {
         var spawnPoint = _spawnPoints[_currentSpawnIndex];
-        t.transform.position = spawnPoint.transform.position;
+        interactableItem.transform.position = spawnPoint.transform.position;
         _currentSpawnIndex = _currentSpawnIndex++ % _spawnPoints.Count;
     }
 
-    protected virtual void OnRelease(T t)
+    protected virtual void OnReleaseIneractbableItem(T interactableItem)
     {
-        t.gameObject.SetActive(false);
     }
 }

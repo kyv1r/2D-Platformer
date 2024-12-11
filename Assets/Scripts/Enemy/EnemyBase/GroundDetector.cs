@@ -5,7 +5,7 @@ public class GroundDetector : MonoBehaviour
 {
     [SerializeField] private float _distanceRay;
     [SerializeField] private LayerMask _layerMask;
-    [SerializeField] private float _checkInterval = 0.001f;
+    [SerializeField] private float _checkInterval = 0.01f;
 
     public bool HasGroundBelow { get; private set; }
 

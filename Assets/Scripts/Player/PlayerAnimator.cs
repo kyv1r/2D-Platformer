@@ -23,9 +23,9 @@ public class PlayerAnimator : MonoBehaviour
         _playerAttack.Attacked -= AttackAnimation;
     }
 
-    private void Update()
+    public void MoveAnimation(Player player)
     {
-        _animator.SetFloat(AnimationStrings.Speed, Mathf.Abs(_player.Rigidbody2D.velocity.x));
+        _animator.SetFloat(AnimationStrings.Speed, Mathf.Abs(player.Rigidbody2D.velocity.x));
     }
 
     private void AttackAnimation()
