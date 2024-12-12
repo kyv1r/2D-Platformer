@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(EnemyMover), typeof(EnemyAttack), typeof(Facing))]
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerFollower), typeof(AreaPatroler))]
+[RequireComponent(typeof(BearAnimator))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _attackDistance = 0.6f;
@@ -13,6 +14,7 @@ public class Enemy : MonoBehaviour
     private Facing _facing;
     private PlayerFollower _playerFollower;
     private AreaPatroler _areaPatroler;
+    private BearAnimator _bearAnimator;
 
     private Rigidbody2D _rigidbody2D;
 
@@ -26,6 +28,7 @@ public class Enemy : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _areaPatroler = GetComponent<AreaPatroler>();
         _playerFollower = GetComponent<PlayerFollower>();
+        _bearAnimator = GetComponent<BearAnimator>();
     }
 
     private void FixedUpdate()
@@ -38,6 +41,8 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        _bearAnimator.MoveAnimation(this);
+
         if (_playerDetector.TryFindPlayerPosition(out Vector2 playerPosition))
         {
             if (CanAttackPlayer(playerPosition))
@@ -70,5 +75,5 @@ public class Enemy : MonoBehaviour
     {
         float distanceToPlayer = ((Vector2)transform.position - currentPlayerPosition).sqrMagnitude;
         return distanceToPlayer <= _attackDistance * _attackDistance;
-    } 
+    }
 }

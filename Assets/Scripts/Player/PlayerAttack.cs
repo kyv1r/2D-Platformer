@@ -1,8 +1,7 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerAnimator))]
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Transform _attackPosition;
@@ -10,12 +9,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float _damage;
     [SerializeField] private LayerMask _layerMaskEnemy;
 
+    private PlayerAnimator _playerAnimator;
     private PlayerInput _playerInput;
-
-    public event Action Attacked;
 
     private void Awake()
     {
+        _playerAnimator = GetComponent<PlayerAnimator>();
         _playerInput = new PlayerInput();
     }
 
@@ -36,10 +35,13 @@ public class PlayerAttack : MonoBehaviour
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
-            Attacked?.Invoke();
+        {
+            _playerAnimator.AttackAnimation();
+            AttackEnemy();
+        }
     }
 
-    public void Attack()
+    public void AttackEnemy()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(_attackPosition.position, _attackRange, _layerMaskEnemy);
 

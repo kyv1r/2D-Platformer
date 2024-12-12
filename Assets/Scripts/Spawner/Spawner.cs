@@ -31,8 +31,4 @@ public class Spawner<T, K> : MonoBehaviour where T : MonoBehaviour where K : Mon
         interactableItem.transform.position = spawnPoint.transform.position;
         _currentSpawnIndex = _currentSpawnIndex++ % _spawnPoints.Count;
     }
-
-    protected virtual void OnReleaseIneractbableItem(T interactableItem)
-    {
-    }
 }

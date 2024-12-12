@@ -1,7 +1,7 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Camera))]
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] private float _damage = 10f;
@@ -10,10 +10,14 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private LayerMask _layerMaskPlayer;
     [SerializeField] private float _attackRate = 1f;
 
+    private BearAnimator _attackAnimator;
     Coroutine _attackCoroutine;
     private bool _isAttacking;
 
-    public event Action Attacked;
+    private void Awake()
+    {
+        _attackAnimator = GetComponent<BearAnimator>();
+    }
 
     public void StartAttack()
     {
@@ -44,14 +48,14 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-    private IEnumerator PerformPeriodicAttack()
+    private IEnumerator PerformPeriodicAttack() 
     {
         WaitForSeconds periodicityAttack = new WaitForSeconds(_attackRate);
 
         while (_isAttacking)
         {
+            _attackAnimator.AttackAnimation();
             Attack();
-            Attacked?.Invoke();
             yield return periodicityAttack;
         }
     }

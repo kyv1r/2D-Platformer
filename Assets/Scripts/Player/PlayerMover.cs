@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(CollisionHandler), typeof(PlayerInput))]
-[RequireComponent(typeof(Facing))]
+[RequireComponent(typeof(Facing), typeof(PlayerAnimator))]
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed;
@@ -12,18 +11,22 @@ public class PlayerMover : MonoBehaviour
     private Facing _facing;
     private CollisionHandler _collisionHandler;
     private PlayerInput _playerInput;
+    private PlayerAnimator _playerAnimator;
 
     public bool _isFacingRight = true;
     private bool _jumpRequested = false;
 
     private Vector2 _moveDirection;
-    private Rigidbody2D _rigidbody;
+    private Rigidbody2D _rigidbody2D;
+
+    public Rigidbody2D Rigidbody2D => _rigidbody2D;
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         _collisionHandler = GetComponent<CollisionHandler>();
         _facing = GetComponent<Facing>();
+        _playerAnimator = GetComponent<PlayerAnimator>();
         _playerInput = new PlayerInput();
     }
 
@@ -49,15 +52,20 @@ public class PlayerMover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rigidbody.velocity = new Vector2(_moveDirection.x * _moveSpeed, _rigidbody.velocity.y);
+        _rigidbody2D.velocity = new Vector2(_moveDirection.x * _moveSpeed, _rigidbody2D.velocity.y);
 
         if (_jumpRequested)
         {
             if (_collisionHandler.IsTouching)
-                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
+                _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _jumpForce);
 
             _jumpRequested = false;
         }
+    }
+
+    private void Update()
+    {
+        _playerAnimator.MoveAnimation(this);
     }
 
     public void OnMove(InputAction.CallbackContext context)

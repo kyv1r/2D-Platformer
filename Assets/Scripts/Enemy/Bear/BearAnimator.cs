@@ -3,9 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class BearAnimator : MonoBehaviour
 {
-    [SerializeField] private Bear _bear;
-    [SerializeField] private EnemyAttack _enemyAttack;
-
     private Animator _animator;
 
     private void Awake()
@@ -13,23 +10,13 @@ public class BearAnimator : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    private void OnEnable()
-    {
-        _enemyAttack.Attacked += AttackAnimation;
-    }
-
-    private void OnDisable()
-    {
-        _enemyAttack.Attacked -= AttackAnimation;
-    }
-
-    private void Update()
-    {
-        _animator.SetFloat(AnimationStrings.Speed, Mathf.Abs(_bear.Rigidbody2D.velocity.x));
-    }
-
-    private void AttackAnimation()
+    public void AttackAnimation()
     {
         _animator.SetTrigger(AnimationStrings.Attack);
+    }
+
+    public void MoveAnimation(Enemy enemy)
+    {
+        _animator.SetFloat(AnimationStrings.Speed, Mathf.Abs(enemy.Rigidbody2D.velocity.x));
     }
 }
