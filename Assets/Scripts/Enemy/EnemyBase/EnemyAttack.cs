@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Camera))]
+[RequireComponent(typeof(CharacterAnimator))]
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] private float _damage = 10f;
@@ -10,13 +10,13 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private LayerMask _layerMaskPlayer;
     [SerializeField] private float _attackRate = 1f;
 
-    private BearAnimator _attackAnimator;
+    private CharacterAnimator _attackAnimator;
     Coroutine _attackCoroutine;
     private bool _isAttacking;
 
     private void Awake()
     {
-        _attackAnimator = GetComponent<BearAnimator>();
+        _attackAnimator = GetComponent<CharacterAnimator>();
     }
 
     public void StartAttack()

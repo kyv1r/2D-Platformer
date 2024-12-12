@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyMover))]
 public class AreaPatroler : MonoBehaviour
 {
     private EnemyMover _enemyMover;
+
+    private Vector2 _moveDirectionX;
 
     private void Awake()
     {
@@ -14,7 +14,10 @@ public class AreaPatroler : MonoBehaviour
 
     public void PatrolArea()
     {
-        float moveDirection = Mathf.Sign(transform.localScale.x);
-        _enemyMover.Move(new Vector2(moveDirection, 0));
+        float localScaleX = Mathf.Sign(transform.localScale.x);
+
+        _moveDirectionX = new Vector2(localScaleX, 0);
+
+        _enemyMover.Move(_moveDirectionX);
     }
 }

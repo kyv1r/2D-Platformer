@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerAnimator))]
+[RequireComponent(typeof(CharacterAnimator))]
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Transform _attackPosition;
@@ -9,12 +9,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float _damage;
     [SerializeField] private LayerMask _layerMaskEnemy;
 
-    private PlayerAnimator _playerAnimator;
+    private CharacterAnimator _playerAnimator;
     private PlayerInput _playerInput;
 
     private void Awake()
     {
-        _playerAnimator = GetComponent<PlayerAnimator>();
+        _playerAnimator = GetComponent<CharacterAnimator>();
         _playerInput = new PlayerInput();
     }
 

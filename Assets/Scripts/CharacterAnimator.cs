@@ -15,8 +15,8 @@ public class CharacterAnimator : MonoBehaviour
         _animator.SetTrigger(AnimationStrings.Attack);
     }
 
-    public void MoveAnimation(Character character)
+    public void MoveAnimation(Rigidbody2D rigidbody2D)
     {
-        _animator.SetFloat(AnimationStrings.Speed, Mathf.Abs(character.Rigidbody2D.velocity.x));
+        _animator.SetFloat(AnimationStrings.Speed, Mathf.Abs(rigidbody2D.velocity.x));
     }
 }

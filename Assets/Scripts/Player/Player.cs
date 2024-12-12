@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(InteractableItemCollector), typeof(PlayerAnimator))]
+[RequireComponent(typeof(InteractableItemCollector))]
 [RequireComponent(typeof(Wallet) ,typeof(PlayerAttack))]
 public class Player : MonoBehaviour
 {

@@ -1159,7 +1159,6 @@ GameObject:
   - component: {fileID: 398753337}
   - component: {fileID: 398753348}
   - component: {fileID: 398753341}
-  - component: {fileID: 398753343}
   - component: {fileID: 398753347}
   - component: {fileID: 398753349}
   - component: {fileID: 398753351}
@@ -1168,6 +1167,7 @@ GameObject:
   - component: {fileID: 398753342}
   - component: {fileID: 398753344}
   - component: {fileID: 398753352}
+  - component: {fileID: 398753353}
   m_Layer: 6
   m_Name: Bear
   m_TagString: Enemy
@@ -1301,18 +1301,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &398753343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 398753336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7779b107ee26dfa40b2332ae42612686, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!70 &398753344
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1455,6 +1443,18 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &398753353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398753336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b19254ace3b30a47a603c1a66e1ebdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &406852545
 GameObject:
   m_ObjectHideFlags: 0
@@ -1652,8 +1652,7 @@ GameObject:
   - component: {fileID: 623104401}
   - component: {fileID: 623104407}
   - component: {fileID: 623104415}
-  - component: {fileID: 623104416}
-  - component: {fileID: 623104417}
+  - component: {fileID: 623104418}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1909,7 +1908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2086bfda5739e3a42bfd0ab0ef25fc7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &623104416
+--- !u!114 &623104418
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1919,18 +1918,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b19254ace3b30a47a603c1a66e1ebdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &623104417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 623104400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c0dd904140a9da41a59010cb11413a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &667068516
