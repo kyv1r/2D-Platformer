@@ -9,6 +9,7 @@ public class HealthSmoothSlider : MonoBehaviour
 
     private Slider _slider;
     private Coroutine _coroutine;
+    private float durationChangeHealth = 0.09f;
 
     private void Awake()
     {
@@ -36,7 +37,7 @@ public class HealthSmoothSlider : MonoBehaviour
     {
         while (_slider.value != healthValue)
         {
-            _slider.value = Mathf.MoveTowards(_slider.value, healthValue, 0.09f);
+            _slider.value = Mathf.MoveTowards(_slider.value, healthValue, durationChangeHealth);
             yield return null;
         }
 
