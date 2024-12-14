@@ -8,7 +8,7 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] private float _currentValue;
 
     public event Action<float> HealthChanged;
-    public event Action OnDied;
+    public event Action Died;
 
     public float CurrentValue
     {
@@ -29,7 +29,7 @@ public class Health : MonoBehaviour, IDamageable
             CurrentValue -= damage;
 
             if (_currentValue <= _minValue)
-                OnDied?.Invoke();
+                Died?.Invoke();
         }
     }
 

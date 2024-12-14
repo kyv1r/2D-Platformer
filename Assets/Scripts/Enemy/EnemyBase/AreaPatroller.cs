@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyMover))]
-public class AreaPatroler : MonoBehaviour
+public class AreaPatroller : MonoBehaviour
 {
     private EnemyMover _enemyMover;
 

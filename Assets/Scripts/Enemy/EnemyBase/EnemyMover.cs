@@ -18,7 +18,7 @@ public class EnemyMover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _enemyAnimator.MoveAnimation(Rigidbody2D);
+        _enemyAnimator.CharacterMove(Rigidbody2D);
     }
 
     public void Move(Vector2 direction)

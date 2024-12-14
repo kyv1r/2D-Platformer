@@ -139,7 +139,6 @@ GameObject:
   - component: {fileID: 8913109959962393358}
   - component: {fileID: 8913109959962393356}
   - component: {fileID: 8913109959962393353}
-  - component: {fileID: 8913109959962393354}
   - component: {fileID: 8913109959962393357}
   - component: {fileID: 8913109959962393349}
   - component: {fileID: 8913109959962393350}
@@ -298,18 +297,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _countCoin: 0
---- !u!114 &8913109959962393354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8913109959962393351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71b78f06bb01204418da002867e6cd03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8913109959962393357
 MonoBehaviour:
   m_ObjectHideFlags: 0

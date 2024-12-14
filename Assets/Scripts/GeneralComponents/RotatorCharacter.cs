@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Facing : MonoBehaviour
+public class RotatorCharacter : MonoBehaviour
 {
     private bool _isFacingRight = true;
 

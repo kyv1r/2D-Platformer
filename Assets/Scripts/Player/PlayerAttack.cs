@@ -36,12 +36,12 @@ public class PlayerAttack : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            _playerAnimator.AttackAnimation();
-            AttackEnemy();
+            _playerAnimator.CharacterAttack();
+            Attack();
         }
     }
 
-    public void AttackEnemy()
+    public void Attack()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(_attackPosition.position, _attackRange, _layerMaskEnemy);
 

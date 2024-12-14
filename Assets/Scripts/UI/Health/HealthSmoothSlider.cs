@@ -32,6 +32,7 @@ public class HealthSmoothSlider : HealthValueView
         while (_slider.value != healthValue)
         {
             _slider.value = Mathf.MoveTowards(_slider.value, healthValue, durationChangeHealth);
+
             yield return null;
         }
 

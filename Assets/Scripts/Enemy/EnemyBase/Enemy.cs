@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMover), typeof(EnemyAttack), typeof(Facing))]
-[RequireComponent(typeof(Rigidbody2D), typeof(PlayerFollower), typeof(AreaPatroler))]
+[RequireComponent(typeof(EnemyMover), typeof(EnemyAttacker), typeof(RotatorCharacter))]
+[RequireComponent(typeof(Rigidbody2D), typeof(PlayerFollower), typeof(AreaPatroller))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _attackDistance = 0.6f;
@@ -9,10 +9,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GroundDetector _groundDetector;
 
     private EnemyMover _movement;
-    private EnemyAttack _attack;
-    private Facing _facing;
+    private EnemyAttacker _attack;
+    private RotatorCharacter _facing;
     private PlayerFollower _playerFollower;
-    private AreaPatroler _areaPatroler;
+    private AreaPatroller _areaPatroler;
 
     private Rigidbody2D _rigidbody2D;
 
@@ -21,10 +21,10 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         _movement = GetComponent<EnemyMover>();
-        _attack = GetComponent<EnemyAttack>();
-        _facing = GetComponent<Facing>();
+        _attack = GetComponent<EnemyAttacker>();
+        _facing = GetComponent<RotatorCharacter>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _areaPatroler = GetComponent<AreaPatroler>();
+        _areaPatroler = GetComponent<AreaPatroller>();
         _playerFollower = GetComponent<PlayerFollower>();
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterAnimator))]
-public class EnemyAttack : MonoBehaviour
+public class EnemyAttacker : MonoBehaviour
 {
     [SerializeField] private float _damage = 10f;
     [SerializeField] private Transform _attackPosition;
@@ -50,13 +50,12 @@ public class EnemyAttack : MonoBehaviour
 
     private IEnumerator PerformPeriodicAttack() 
     {
-        WaitForSeconds periodicityAttack = new WaitForSeconds(_attackRate);
-
         while (_isAttacking)
         {
-            _attackAnimator.AttackAnimation();
+            _attackAnimator.CharacterAttack();
             Attack();
-            yield return periodicityAttack;
+
+            yield return new WaitForSeconds(_attackRate);
         }
     }
 }

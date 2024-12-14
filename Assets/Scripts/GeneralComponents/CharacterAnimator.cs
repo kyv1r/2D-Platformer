@@ -10,12 +10,12 @@ public class CharacterAnimator : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    public void AttackAnimation()
+    public void CharacterAttack()
     {
         _animator.SetTrigger(AnimationStrings.Attack);
     }
 
-    public void MoveAnimation(Rigidbody2D rigidbody2D)
+    public void CharacterMove(Rigidbody2D rigidbody2D)
     {
         _animator.SetFloat(AnimationStrings.Speed, Mathf.Abs(rigidbody2D.velocity.x));
     }
