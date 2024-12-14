@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterAnimator))]
-public class PlayerAttack : MonoBehaviour
+public class PlayerAttacker : MonoBehaviour
 {
     [SerializeField] private Transform _attackPosition;
     [SerializeField] private float _attackRange;
@@ -36,7 +36,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            _playerAnimator.CharacterAttack();
+            _playerAnimator.PlayAttack();
             Attack();
         }
     }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(InteractableItemCollector))]
-[RequireComponent(typeof(Wallet) ,typeof(PlayerAttack))]
+[RequireComponent(typeof(Wallet) ,typeof(PlayerAttacker))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private InteractableItemCollector _interactableItemCollector;

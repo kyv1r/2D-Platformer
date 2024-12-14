@@ -137,7 +137,6 @@ GameObject:
   - component: {fileID: 756072746205962175}
   - component: {fileID: 8913109959962393346}
   - component: {fileID: 8913109959962393358}
-  - component: {fileID: 8913109959962393356}
   - component: {fileID: 8913109959962393353}
   - component: {fileID: 8913109959962393357}
   - component: {fileID: 8913109959962393349}
@@ -145,6 +144,8 @@ GameObject:
   - component: {fileID: 8913109959962393344}
   - component: {fileID: 8913109959962393352}
   - component: {fileID: 8913109959962393397}
+  - component: {fileID: 5173941613914071194}
+  - component: {fileID: 1174309300351133842}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -266,24 +267,6 @@ MonoBehaviour:
   _moveSpeed: 3
   _jumpForce: 4
   _isFacingRight: 1
---- !u!114 &8913109959962393356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8913109959962393351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adc5d5f29325a1442b80f5ea36d29a04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attackPosition: {fileID: 8913109958612571607}
-  _attackRange: 3
-  _damage: 5
-  _layerMaskEnemy:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &8913109959962393353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,5 +381,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b19254ace3b30a47a603c1a66e1ebdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5173941613914071194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8913109959962393351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39b67d391cd6474fadc19e437450514, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackPosition: {fileID: 0}
+  _attackRange: 0
+  _damage: 0
+  _layerMaskEnemy:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &1174309300351133842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8913109959962393351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4531691865de07245b622d29dd35e2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

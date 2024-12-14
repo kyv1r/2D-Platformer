@@ -52,7 +52,7 @@ public class EnemyAttacker : MonoBehaviour
     {
         while (_isAttacking)
         {
-            _attackAnimator.CharacterAttack();
+            _attackAnimator.PlayAttack();
             Attack();
 
             yield return new WaitForSeconds(_attackRate);

@@ -2,13 +2,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(CollisionHandler), typeof(PlayerInput))]
-[RequireComponent(typeof(RotatorCharacter), typeof(CharacterAnimator))]
+[RequireComponent(typeof(Rotator), typeof(CharacterAnimator))]
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpForce;
 
-    private RotatorCharacter _facing;
+    private Rotator _facing;
     private CollisionHandler _collisionHandler;
     private PlayerInput _playerInput;
     private CharacterAnimator _playerAnimator;
@@ -25,7 +25,7 @@ public class PlayerMover : MonoBehaviour
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _collisionHandler = GetComponent<CollisionHandler>();
-        _facing = GetComponent<RotatorCharacter>();
+        _facing = GetComponent<Rotator>();
         _playerAnimator = GetComponent<CharacterAnimator>();
         _playerInput = new PlayerInput();
     }
@@ -65,7 +65,7 @@ public class PlayerMover : MonoBehaviour
 
     private void Update()
     {
-        _playerAnimator.CharacterMove(Rigidbody2D);
+        _playerAnimator.PlayMove(Rigidbody2D);
     }
 
     public void OnMove(InputAction.CallbackContext context)

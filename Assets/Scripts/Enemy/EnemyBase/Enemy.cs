@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMover), typeof(EnemyAttacker), typeof(RotatorCharacter))]
+[RequireComponent(typeof(EnemyMover), typeof(EnemyAttacker), typeof(Rotator))]
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerFollower), typeof(AreaPatroller))]
 public class Enemy : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
 
     private EnemyMover _movement;
     private EnemyAttacker _attack;
-    private RotatorCharacter _facing;
+    private Rotator _facing;
     private PlayerFollower _playerFollower;
     private AreaPatroller _areaPatroler;
 
@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     {
         _movement = GetComponent<EnemyMover>();
         _attack = GetComponent<EnemyAttacker>();
-        _facing = GetComponent<RotatorCharacter>();
+        _facing = GetComponent<Rotator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _areaPatroler = GetComponent<AreaPatroller>();
         _playerFollower = GetComponent<PlayerFollower>();
