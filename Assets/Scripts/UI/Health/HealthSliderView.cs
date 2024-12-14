@@ -1,32 +1,28 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
-public class HealthSliderView : MonoBehaviour
+public class HealthSliderView : HealthValueView
 {
-    [SerializeField] private HealthSystem _healthSystem;
-
     private Slider _slider;
 
     private void Awake()
     {
         _slider = GetComponent<Slider>();
-
-        _slider.value = _healthSystem.CurrentValue;
+        Init();
     }
 
-    private void OnEnable()
+    protected override void Init()
     {
-        _healthSystem.HealthChanged += SetCurrentHealthValue;
+        base.Init();
+        _slider.value = HealthValue;
     }
 
-    private void OnDisable()
+    protected override void SetCurrentHealthValue(float healthValue)
     {
-        _healthSystem.HealthChanged -= SetCurrentHealthValue;
-    }
+        base.SetCurrentHealthValue(healthValue);
+        _slider.value = HealthValue;
 
-    private void SetCurrentHealthValue(float healthValue)
-    {
-        _slider.value = healthValue;
     }
 }

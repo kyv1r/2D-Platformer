@@ -8,12 +8,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpForce;
 
-    private HealthSystem _healthSystem;
+    private Health _health;
     private Wallet _wallet;
 
     private void Awake()
     {
-        _healthSystem = GetComponent<HealthSystem>();
+        _health = GetComponent<Health>();
         _wallet = GetComponent<Wallet>();
     }
 
@@ -46,6 +46,6 @@ public class Player : MonoBehaviour
 
     private void Heal(float healPoint)
     {
-        _healthSystem.Heal(healPoint);
+        _health.Heal(healPoint);
     }
 }

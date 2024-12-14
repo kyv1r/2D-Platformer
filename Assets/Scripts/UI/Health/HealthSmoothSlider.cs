@@ -3,10 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
-public class HealthSmoothSlider : MonoBehaviour
+public class HealthSmoothSlider : HealthValueView
 {
-    [SerializeField] private HealthSystem _healthSystem;
-
     private Slider _slider;
     private Coroutine _coroutine;
     private float durationChangeHealth = 0.09f;
@@ -14,23 +12,19 @@ public class HealthSmoothSlider : MonoBehaviour
     private void Awake()
     {
         _slider = GetComponent<Slider>();
-
-        _slider.value = _healthSystem.CurrentValue;
+        Init();
     }
 
-    private void OnEnable()
+    protected override void Init()
     {
-        _healthSystem.HealthChanged += SetCurrentHealthValue;
+        base.Init();
+        _slider.value = HealthValue;
     }
 
-    private void OnDisable()
+    protected override void SetCurrentHealthValue(float healthValue)
     {
-        _healthSystem.HealthChanged -= SetCurrentHealthValue;
-    }
-
-    private void SetCurrentHealthValue(float healthValue)
-    {
-        _coroutine = StartCoroutine(SmoothChangeHealthValue(healthValue));
+        base.SetCurrentHealthValue(healthValue);
+        _coroutine = StartCoroutine(SmoothChangeHealthValue(HealthValue));
     }
 
     private IEnumerator SmoothChangeHealthValue(float healthValue)
@@ -41,7 +35,9 @@ public class HealthSmoothSlider : MonoBehaviour
             yield return null;
         }
 
-        if(_slider.value != healthValue)
+        if (_slider.value == healthValue)
+        {
             yield break;
+        }
     }
 }
