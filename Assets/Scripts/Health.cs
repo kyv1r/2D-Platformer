@@ -22,11 +22,6 @@ public class Health : MonoBehaviour, IDamageable
 
     public float MaxValue => _maxValue;
 
-    private void Awake()
-    {
-        _currentValue = _maxValue;
-    }
-
     public void TakeDamage(float damage)
     {
         if (damage >= 0)

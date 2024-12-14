@@ -236,7 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxValue: 100
   _minValue: 0
-  _currentValue: 100
+  _currentValue: 50
 --- !u!114 &8913109959962393346
 MonoBehaviour:
   m_ObjectHideFlags: 0
