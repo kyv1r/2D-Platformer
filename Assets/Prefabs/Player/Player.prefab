@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 8913109959962393397}
   - component: {fileID: 5173941613914071194}
   - component: {fileID: 1174309300351133842}
+  - component: {fileID: 6758685480960848012}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -395,12 +396,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e39b67d391cd6474fadc19e437450514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackPosition: {fileID: 0}
-  _attackRange: 0
-  _damage: 0
+  _attackPosition: {fileID: 8913109958612571607}
+  _attackRange: 0.07
+  _damage: 5
   _layerMaskEnemy:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!114 &1174309300351133842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,3 +414,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4531691865de07245b622d29dd35e2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6758685480960848012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8913109959962393351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 456e2c55e109870449b33301d61abb17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ability: {fileID: 11400000, guid: 9a2e81ce0623e9b47886108bd68abaa6, type: 2}

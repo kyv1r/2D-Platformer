@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerDetector : MonoBehaviour
 {
-    [SerializeField] private Enemy _enemy;
     [SerializeField] private float _distanceRay;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float _radiusDetect;

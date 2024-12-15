@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6a117cedb46ba4f8be2bd0211ba805, type: 3}
+  m_Name: Vampirism
+  m_EditorClassIdentifier: 
+  TouchLogic: {fileID: 11400000, guid: 72e6114e72046b241b40de6ff6987993, type: 2}
+  AbilityAction: {fileID: 11400000, guid: bc02d79ebdcb0b74bbde1bda061b5b87, type: 2}
