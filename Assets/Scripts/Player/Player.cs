@@ -1,7 +1,8 @@
+using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(InteractableItemCollector), typeof(AbilityUser))]
-[RequireComponent(typeof(Wallet) ,typeof(PlayerAttacker))]
+[RequireComponent(typeof(InteractableItemCollector), typeof(Vampirism), typeof(CharacterAnimator))]
+[RequireComponent(typeof(Wallet) ,typeof(PlayerAttacker), typeof(PlayerMover))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private InteractableItemCollector _interactableItemCollector;
@@ -10,13 +11,15 @@ public class Player : MonoBehaviour
 
     private Health _health;
     private Wallet _wallet;
-    private AbilityUser _abiltyUser;
+    private PlayerMover _playerMover;
+    private Vampirism _abiltyUser;
 
     private void Awake()
     {
-        _abiltyUser = GetComponent<AbilityUser>();
+        _abiltyUser = GetComponent<Vampirism>();
         _health = GetComponent<Health>();
         _wallet = GetComponent<Wallet>();
+        _playerMover = GetComponent<PlayerMover>();
     }
 
     private void OnEnable()

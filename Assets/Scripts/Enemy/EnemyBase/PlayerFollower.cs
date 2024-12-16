@@ -10,7 +10,7 @@ public class PlayerFollower : MonoBehaviour
         _enemyMover = GetComponent<EnemyMover>();
     }
 
-    public void FollowPlayer(Vector2 playerPosition)
+    public void Follow(Vector2 playerPosition)
     {
         Vector2 direction = playerPosition - (Vector2)transform.position;
         _enemyMover.Move(direction);

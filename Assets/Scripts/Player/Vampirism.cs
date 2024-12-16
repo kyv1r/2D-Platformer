@@ -3,26 +3,31 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class AbilityUser : MonoBehaviour
+public class Vampirism : MonoBehaviour
 {
     [SerializeField] private Ability _ability;
     [SerializeField] private EnemyDetector _enemyDetector;
 
     private PlayerInput _playerInput;
-    private Coroutine _coolDownCoroutine;
+    private Coroutine _cooldownCoroutine;
     private Coroutine _pullHealthCoroutine;
 
     private float _timeAbility = 6;
-    private float _coolDown = 10;
+    private float _cooldown = 10;
     private float _pulledHealthValue;
     private float _radiusConversionCoefficient = 2;
     private float _frameRateDamage = 0.5f;
+    private WaitForSeconds _waitForAbilityTime;
+    private WaitForSeconds _waitForCooldown;
 
     public event Action<float> PulledHealth;
 
     private void Awake()
     {
         _playerInput = new PlayerInput();
+
+        _waitForAbilityTime = new WaitForSeconds(_timeAbility);
+        _waitForCooldown = new WaitForSeconds(_cooldown - _timeAbility);
     }
 
     private void OnEnable()
@@ -43,21 +48,21 @@ public class AbilityUser : MonoBehaviour
     {
         if(context.phase == InputActionPhase.Performed)
         {
-            _coolDownCoroutine = StartCoroutine(CoolDown());
+            _cooldownCoroutine = StartCoroutine(Cooldown());
             _pullHealthCoroutine = StartCoroutine(PullHealth());
         }
     }
 
-    private IEnumerator CoolDown()
+    private IEnumerator Cooldown()
     {
         _playerInput.Disable();
         _enemyDetector.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(_timeAbility);
+        yield return _waitForAbilityTime;
 
         _enemyDetector.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(_coolDown - _timeAbility);
+        yield return _waitForCooldown;
 
         _playerInput.Enable();
     }

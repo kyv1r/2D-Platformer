@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(CollisionHandler), typeof(PlayerInput))]
-[RequireComponent(typeof(Rotator), typeof(CharacterAnimator))]
+[RequireComponent(typeof(Rotator), typeof(CharacterAnimator), typeof(Health))]
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed;
@@ -12,6 +12,7 @@ public class PlayerMover : MonoBehaviour
     private CollisionHandler _collisionHandler;
     private PlayerInput _playerInput;
     private CharacterAnimator _playerAnimator;
+    private Health _health;
 
     public bool _isFacingRight = true;
     private bool _jumpRequested = false;
@@ -27,6 +28,8 @@ public class PlayerMover : MonoBehaviour
         _collisionHandler = GetComponent<CollisionHandler>();
         _facing = GetComponent<Rotator>();
         _playerAnimator = GetComponent<CharacterAnimator>();
+        _health = GetComponent<Health>();
+
         _playerInput = new PlayerInput();
     }
 
@@ -52,15 +55,23 @@ public class PlayerMover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rigidbody2D.velocity = new Vector2(_moveDirection.x * _moveSpeed, _rigidbody2D.velocity.y);
-
-        if (_jumpRequested)
+        if(_health.IsDie == false)
         {
-            if (_collisionHandler.IsTouching)
-                _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _jumpForce);
+            _rigidbody2D.velocity = new Vector2(_moveDirection.x * _moveSpeed, _rigidbody2D.velocity.y);
 
-            _jumpRequested = false;
+            if (_jumpRequested)
+            {
+                if (_collisionHandler.IsTouching)
+                    _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _jumpForce);
+
+                _jumpRequested = false;
+            }
         }
+        else
+        {
+            _rigidbody2D.velocity = Vector2.zero;
+        }
+        
     }
 
     private void Update()

@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(EnemyMover), typeof(EnemyAttacker), typeof(Rotator))]
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerFollower), typeof(AreaPatroller))]
+[RequireComponent(typeof(Health))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _attackDistance = 0.6f;
@@ -13,6 +14,7 @@ public class Enemy : MonoBehaviour
     private Rotator _facing;
     private PlayerFollower _playerFollower;
     private AreaPatroller _areaPatroler;
+    private Health _health;
 
     private Rigidbody2D _rigidbody2D;
 
@@ -26,25 +28,46 @@ public class Enemy : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _areaPatroler = GetComponent<AreaPatroller>();
         _playerFollower = GetComponent<PlayerFollower>();
+        _health = GetComponent<Health>();
     }
 
     private void FixedUpdate()
     {
-        if (_playerDetector.TryFindPlayerPosition(out Vector2 playerPosition))
-            FollowPlayer(playerPosition);
+        if (_health.IsDie == false)
+        {
+            if (_playerDetector.TryFindPlayerPosition(out Vector2 playerPosition))
+                FollowPlayer(playerPosition);
+            else
+                Patrol();
+        }
         else
-            Patrol();
+        {
+            _movement.Rigidbody2D.velocity = Vector2.zero;
+        }
+
     }
 
     private void Update()
     {
-        if (_playerDetector.TryFindPlayerPosition(out Vector2 playerPosition))
+        if (_health.IsDie == false)
         {
-            if (CanAttackPlayer(playerPosition))
-                _attack.StartAttack();
+            if (_playerDetector.TryFindPlayerPosition(out Vector2 playerPosition))
+            {
+                if (CanAttackPlayer(playerPosition))
+                    _attack.StartAttack();
+                else
+                    _attack.StopAttack();
+            }
             else
+            {
                 _attack.StopAttack();
+            }
         }
+        else
+        {
+            _attack.StopAttack();
+        }
+
     }
 
     private void Patrol()
@@ -57,7 +80,7 @@ public class Enemy : MonoBehaviour
 
     private void FollowPlayer(Vector2 currentPlayerPosition)
     {
-        _playerFollower.FollowPlayer(currentPlayerPosition);
+        _playerFollower.Follow(currentPlayerPosition);
 
         Vector2 direction = currentPlayerPosition - (Vector2)transform.position;
         _facing.SetFacingDirection(direction);

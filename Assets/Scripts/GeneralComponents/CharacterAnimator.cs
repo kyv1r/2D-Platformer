@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -18,5 +19,10 @@ public class CharacterAnimator : MonoBehaviour
     public void PlayMove(Rigidbody2D rigidbody2D)
     {
         _animator.SetFloat(AnimationStrings.Speed, Mathf.Abs(rigidbody2D.velocity.x));
+    }
+
+    public void PlayDie()
+    {
+        _animator.SetTrigger(AnimationStrings.Die);
     }
 }
